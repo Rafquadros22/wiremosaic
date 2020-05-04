@@ -179,7 +179,7 @@ $(document).ready(function () {
      
 
       $.ajax({
-        url:`http://api.openweathermap.org/data/2.5/uvi?appid=045f01a53bdb9c81d396467bc99a5685&lat=${cityLat}&lon=${cityLon}`,
+        url:`https://api.openweathermap.org/data/2.5/uvi?appid=045f01a53bdb9c81d396467bc99a5685&lat=${cityLat}&lon=${cityLon}`,
       
       
         method:"GET"
