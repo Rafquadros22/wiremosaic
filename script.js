@@ -1,5 +1,11 @@
+
+$( "#5-day" ).hide();
+ 
 $(document).ready(function () {
-  if ("geolocation" in navigator) {
+
+ 
+ 
+ if ("geolocation" in navigator) {
     //check geolocation available
     //try to get user current location using getCurrentPosition() method
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -42,7 +48,7 @@ $(document).ready(function () {
       );
 
       $("#display").append("Temperature = " + tempF + "F" + "<br>");
-      console.log(response);
+      // console.log(response);
 
       $("#display").append(
         "Humidity = " + response.main.humidity + "%" + "<br>"
@@ -65,18 +71,25 @@ $(document).ready(function () {
       $("#search-history").append("<li>" + cities[0] + "</li>");
     });
 
+
+
+     
+  
     $.ajax({
       url: `https://api.openweathermap.org/data/2.5/forecast?q=${userCity}&appid=045f01a53bdb9c81d396467bc99a5685`,
 
       method: "GET",
     }).then(function (response) {
+ 
+      $( "#5-day" ).show( "slow", function() {
+  
       $("#mon").empty();
       $("#tues").empty();
       $("#wed").empty();
       $("#thurs").empty();
       $("#fri").empty();
       
-      
+          
       console.log(response);
       var forecast1temp = parseInt(
         (response.list[4].main.feels_like - 273.15) * 1.8 + 32
@@ -154,8 +167,56 @@ $(document).ready(function () {
           response.list[36].weather[0].icon +
           ".png' alt='Icon depicting current weather.'>"
       );
-
+    
     });
+   
+
+  var cityLat = response.city.coord.lat;
+  
+  
+  var cityLon = response.city.coord.lon;
+
+     
+
+      $.ajax({
+        url:`http://api.openweathermap.org/data/2.5/uvi?appid=045f01a53bdb9c81d396467bc99a5685&lat=${cityLat}&lon=${cityLon}`,
+      
+      
+        method:"GET"
+      }).then(function(response){
+
+        console.log(response)
+
+        $("#uvi-dis").html("UVI :" + response.value)
+
+        
+            
+       
+        
+        if(response.value  < 8 ){
+          $("#uvi-dis").css('background-color', 'yellow')
+        }
+        
+
+        if(response.value  > 8 ){
+          $("#uvi-dis").css('background-color', 'red')
+        }
+
+
+            
+        if(response.value  < 6 ){
+          $("#uvi-dis").css('background-color', 'green')
+        }
+
+
+      
+
+
+      })
+});
+   
+
+  
 
     event.preventDefault();
   });

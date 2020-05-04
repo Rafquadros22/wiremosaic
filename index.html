@@ -4,19 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather</title>
+    
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-  </head>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@700&display=swap" rel="stylesheet">
+</head>
   <body>
     <nav class="navbar navbar-dark bg-dark text-light ">
     <h1>Weather Dashboard</h1>
     </nav>
 
-    <div class="container">
+    <div id="main-body" class="container">
       <div class="row">
         <div id="city-list" class="col-md-4 border border-dark">
           <form>
@@ -39,10 +42,11 @@
         <div id="main" class="col-md-8 border border-dark">
           <label for="weather"><h5>Current Weather</h5></label>
           <div id="display"></div>
+          <span id="uvi-dis"></span>
         </div>
       </div>
 
-      <div class="row">
+      <div id="5-day" class="row">
         <div class="card border-dark" style="width: 14.25rem;">
           <h5 class="card-title">Monday</h5>
           <div id="mon" class="card-body"></div>
