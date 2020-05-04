@@ -1,9 +1,9 @@
 
-$( "#5-day" ).hide();
- 
+$( "#five-day" ).hide();
+
 $(document).ready(function () {
 
- 
+
  
  if ("geolocation" in navigator) {
     //check geolocation available
@@ -19,23 +19,29 @@ $(document).ready(function () {
   } else {
     // console.log("Browser doesn't support geolocation!");
   }
+ 
 
-  //submit button
+  
+  
+  //submit  city button
   $("#submit").click(function (event) {
-    var userCity = $("#search-city").val().trim();
+    //give user city a value
+   var userCity = $("#search-city").val().trim();
+   
+   var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${userCity}&appid=045f01a53bdb9c81d396467bc99a5685`;
 
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${userCity}&appid=045f01a53bdb9c81d396467bc99a5685`;
-
-    $("#display").empty();
-
-    console.log(queryURL);
-    //ajax call
+    //empty the display container
+  $("#display").empty();
+  
+  //  console.log(queryURL);
+   
+    //ajax call 
     $.ajax({
       url: queryURL,
 
       method: "GET",
     }).then(function (response) {
-      var cities = [];
+        var cities =[];
 
       var momentNow = moment();
 
@@ -44,7 +50,7 @@ $(document).ready(function () {
       console.log(tempF);
 
       $("#display").append(
-        response.name + momentNow.format(" MMMM DD YYYY ") + "<br>"
+       "<h5>"+ response.name + "</h5>" + momentNow.format(" MMMM DD YYYY ") + "<br>"
       );
 
       $("#display").append("Temperature = " + tempF + "F" + "<br>");
@@ -64,12 +70,26 @@ $(document).ready(function () {
           ".png' alt='Icon depicting current weather.'>"
       );
 
+       
+
+
+
+
       cities.push(userCity);
 
       localStorage.setItem(cities, JSON.stringify(userCity));
 
-      $("#search-history").append("<li>" + cities[0] + "</li>");
+       $("#search-history").append("<div>" + cities[0] + "</div>")
+
+  
     });
+     
+
+
+
+  
+
+
 
 
 
@@ -81,7 +101,7 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
  
-      $( "#5-day" ).show( "slow", function() {
+      $( "#five-day" ).show( "slow", function() {
   
       $("#mon").empty();
       $("#tues").empty();
