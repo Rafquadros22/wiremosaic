@@ -12,7 +12,8 @@ $(document).ready(function() {
 			url: queryURL,
 			method: "GET",
 		}).then(function(response) {
-			var cities = [];
+		
+			var cities=[];
 			var momentNow = moment();
 			var tempF = parseInt((response.main.temp - 273.15) * 1.8 + 32);
 			console.log(tempF);
@@ -21,10 +22,31 @@ $(document).ready(function() {
 			$("#display").append("Humidity = " + response.main.humidity + "%" + "<br>");
 			$("#display").append("Wind speed = " + response.wind.speed + "MPH" + "<br>");
 			$("#display").append("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='Icon depicting current weather.'>");
-			cities.push(userCity);
+			
+			 cities.push(userCity);
+			
 			localStorage.setItem(cities, JSON.stringify([userCity]));
+			
+			// if (localStorage.getItem('city') === null) {
+			// 	cities=[];
+
+			// } else {
+			// 	cities = JSONparse(localStorage.getItem('city'));
+			// 	}
+			
+			// cities.push(userCity);
+			
+			// localStorage.setItem("city",JSONstringify(cities));
+			
+			// console.log(cities);
+
+
 			$("#search-history").append("<div>" + cities[0] + "</div>");
-		});
+			
+				});
+		
+				
+	
 		//5-dayy forecast ajax call
 		$.ajax({
 			url: `https://api.openweathermap.org/data/2.5/forecast?q=${userCity}&appid=045f01a53bdb9c81d396467bc99a5685`,
